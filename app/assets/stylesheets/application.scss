@@ -9,17 +9,24 @@
 body {
     padding-top: 50px;
   }
-  
-  
   /*
    * Global add-ons
    */
-  
-  .sub-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+   .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: #0580cd;
+    background-color: transparent;
   }
-  
+  .navbar-inverse .navbar-brand {
+    color: #fff;
+  }
+  .navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    font-size:1.2em;
+  }
+  .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #0580cd;
+    background-color: transparent;
+  }
   /*
    * Top navigation
    * Hide default border to remove 1px line.
