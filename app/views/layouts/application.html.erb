@@ -24,7 +24,14 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><i class="glyphicon glyphicon-open"></i></a></li>
             <li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
-            <li><a href="#">Profile</a></li>
+
+            <% if user_signed_in? %>
+              <li class="navbar-right navbar-brand"><%= current_user.email %></li>
+            <% else %>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+            <% end %>
+            
+
           </ul>
           <form class="navbar-form" style="margin-left:15%;">
             <div class="input-group" style="width: 65%;">
@@ -46,20 +53,7 @@
     </div>
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><%= link_to root_path do %>
-                <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp; Home
-            <% end %></li>
-            <li><%= link_to root_path do %>
-                <span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp; Tranding
-            <% end %></li>
-            <li><%= link_to root_path do %>
-                <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp; Following
-            <% end %></li>
-          </ul>
-        </div>
+      
       <%= yield %>
     </div>
      <!-- Bootstrap core JavaScript
