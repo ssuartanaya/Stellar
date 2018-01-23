@@ -24,8 +24,6 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><i class="glyphicon glyphicon-open"></i></a></li>
             <li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
-
-
             <% if user_signed_in? %>
               <li class="navbar-right navbar-brand"><%= current_user.email %></li>
             <% else %>
