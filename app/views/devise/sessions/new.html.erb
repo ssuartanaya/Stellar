@@ -1,23 +1,28 @@
-<div class="panel panel-default">
+<div class="panel panel-default" style="background: rgba(255,255,255,0.3)">
   <div class="panel-body">
-    <h2 class="login-title">Log in</h2>
+    <h2 class="login-title" style="color:white">Log in</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control' %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "off", class:'form-control' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control', placeholder: 'Email' %>
         </div>
         <br>
-        <% if devise_mapping.rememberable? -%>
-          <div class="field">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "off", class:'form-control', placeholder: 'Password' %>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-8">
+            <% if devise_mapping.rememberable? -%>
+              <div class="field">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me, style:'color:white' %>
+              </div>
+            <% end -%>
           </div>
-        <% end -%>
+          <div class="col-md-4">
+            <%= link_to "Forgot password?", new_user_password_path, style: 'color: white' %>
+          </div>
+        </div>
         <br>
         <div class="actions">
           <%= f.submit "Log in", class:"btn btn-lg btn-primary btn-block" %>
@@ -26,28 +31,23 @@
   </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default" style="background: rgba(255,255,255,0.3)">
   <div class="panel-body">
-    <h2>Sign up</h2>
+    <h2 style="color:white">Sign up</h2>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
-
         <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email' %>
         </div>
-
         <div class="field">
-          <%= f.label :password %>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder:'Password' %>
         </div>
-
+        <br>
         <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder:'Repat password' %>
         </div>
         <br>
         <div class="actions">
@@ -58,6 +58,6 @@
 </div>
  
 
-
+<%# , style: 'background-color: #1f232c' %>
 
 
