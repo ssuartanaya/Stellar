@@ -23,7 +23,7 @@
         <div id="navbar" class="navbar-collapse collapse">  
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><i class="glyphicon glyphicon-th"></i></a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-open"></i></a></li>
+            <li><%= link_to "UP", new_video_path %></li>
             <li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
             <% if user_signed_in? %>
             <li><%= link_to current_user.email, edit_user_registration_path %></li>
