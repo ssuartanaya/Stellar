@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<video width="800" height="423" controls autoplay>
+	<source src="<%= @video.video %>" type="video/mp4" />
+</video> 	
+
+
+<h3>
   <%= @video.title %>
-</p>
+</h3>
 
 <p>
   <strong>Description:</strong>
@@ -16,4 +20,6 @@
 </p>
 
 <%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Destroy', video_path, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', videos_path %>
+

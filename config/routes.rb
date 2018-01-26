@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :videos
   resources :users, only: [:show]
-  devise_for :users
   
+  
+  root 'videos#index'
   get 'users/:id' => 'users#show'
-  root 'videos#index' 
+   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
