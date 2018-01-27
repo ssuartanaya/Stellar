@@ -212,6 +212,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   carrierwave
   carrierwave-ffmpeg
+
   coffee-rails (~> 4.2)
   devise
   jbuilder (~> 2.5)
