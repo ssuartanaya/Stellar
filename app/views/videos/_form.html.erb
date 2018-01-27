@@ -22,6 +22,16 @@
   </div>
 
   <div class="field">
+    <%= form.label :thumbnail %>
+    <%= form.file_field :thumbnail, id: :video_thumbnail %>
+  </div>
+
+  <div class="field">
+    <%= form.label :video %>
+    <%= form.file_field :video, id: :video_video %>
+  </div>
+
+  <div class="field">
     <%= form.label :status %>
     <%= form.text_field :status, id: :video_status %>
   </div>

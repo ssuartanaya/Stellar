@@ -1,15 +1,18 @@
-<h1 class="page-header">Dashboard</h1>
+<p id="notice"><%= notice %></p>
+
+<br>
+<h4 style="font-weight: bold;">Trending</h4>
+<br>
 
   <tbody>
     <% @videos.each do |video| %>
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4><%= video.title %></h4>
-        <p>Posted by <%= link_to video.user.try(:email), user_path(video.user) %> <%= time_ago_in_words(video.created_at) %> ago</p>
-        <%= link_to 'Show', video %>
-        <%= link_to 'Edit', edit_video_path(video) %>
-        <%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <div class="col-sm-6 col-md-3 placeholder">
+        <%= link_to (image_tag video.thumbnail.url, size: "240x240"), video %>
+        <h5 style="font-weight: bold"><%= video.title %></h5>
+        <h6>Posted by <%= link_to video.user.try(:email), user_path(video.user) %> <br>
+        <%= time_ago_in_words(video.created_at) %> ago</h6>    
       </div>
+      
     <% end %>
   </tbody>
 

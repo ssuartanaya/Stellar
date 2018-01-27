@@ -23,7 +23,17 @@
         <div id="navbar" class="navbar-collapse collapse">  
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><i class="glyphicon glyphicon-th"></i></a></li>
-            <li><%= link_to new_video_path do %><i class="glyphicon glyphicon-open"></i><% end %></li>
+            <li>
+              <% if user_signed_in? %>
+                <%= link_to new_video_path do %>
+                  <i class="glyphicon glyphicon-open"></i>
+                <% end %>
+              <% else %>
+                <%= link_to new_user_session_path do %>
+                  <i class="glyphicon glyphicon-open"></i>
+                <% end %>
+              <% end %>
+            </li>
             <li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
             <% if user_signed_in? %>
               <% unless current_user.foto.blank? %>

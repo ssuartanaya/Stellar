@@ -31,7 +31,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'jquery-rails'
-gem 'carrierwave', '~> 1.0'
+
+gem 'carrierwave'
+gem 'carrierwave-ffmpeg'
+
 
 #bcrypt
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
