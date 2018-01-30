@@ -1,0 +1,55 @@
+<br>
+<br><div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="panel panel-default" style="background: rgba(255,255,255,0.3)">
+      <div class="panel-body">
+        <div>
+          <% unless @user.foto.blank? %>
+            <%= image_tag(@user.foto.url, class:'img-circle', style: 'width: 100px; height: 100px; margin-left: auto; margin-right: auto; display: block') %>
+          <% else %>
+            <%= image_tag("default.jpg", class:'img-circle', style: 'width: 100px; height: 100px; margin-left: auto; margin-right: auto; display: block') %>
+          <% end %>
+           <h2 style="text-align:center">Edit Profile <%= @user.username %></h2>
+        </div>
+          <br>
+          <%= form_for(@user) do |f| %>
+           <div class="field">
+              <%= f.label :username %>
+              <%= f.text_field :username, class: 'form-control' %>
+            </div>
+
+            <div class="field">
+              <%= f.label :email %>
+              <%= f.email_field :email, class: 'form-control' %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+              <%= f.password_field :password, class:'form-control' %>
+              <% if @minimum_password_length %>
+                <br />
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, class: "form-control" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :photo_Profile %>
+              <%= f.file_field :foto %>
+            </div>
+
+            <br>
+            <div class="actions">
+              <%= f.submit "Update", class:"btn btn-lg btn-primary btn-block" %>
+            </div>
+          <% end %>
+        </div>
+      </div> 
+  </div>
+  <div class="col-md-3"></div>
+</div>
