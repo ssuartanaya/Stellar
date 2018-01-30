@@ -1,0 +1,6 @@
+<%= simple_form_for(reply) do |f| %>
+	<%= f.hidden_field :comment_id %>
+	<%= f.hidden_field :video_id %>
+	<%= f.input :content, label: "Reply Comment" %>
+	<%= f.submit :submit %>
+<% end %>

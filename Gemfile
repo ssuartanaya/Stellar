@@ -34,6 +34,7 @@ gem 'jquery-rails'
 
 gem 'carrierwave'
 gem 'carrierwave-ffmpeg'
+gem 'simple_form'
 
 
 #bcrypt

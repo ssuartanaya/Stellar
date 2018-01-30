@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :videos
-  resources :users  
+  resources :videos do
+  	resources :comments
+  end
+	resources :replies
+  resources :users
   
   root 'videos#index'
   get 'users/:id/follow', to: 'users#follow', as: 'follow'
