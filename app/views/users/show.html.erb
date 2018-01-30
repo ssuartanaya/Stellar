@@ -1,1 +1,67 @@
-<h1>Profile Page!</h1>
+<br><br><br>
+<div class="container">  
+  <div class="row">
+    <div class="col-md-3">
+    <%# user have a photo %>
+    <% unless @user.foto.blank? %>
+      <%= image_tag(@user.foto.url, class:'img-circle img-responsive', style: 'width: 200px; height: 200px;') %>
+    <% else %>
+      <%= image_tag("default.jpg", class:'img-circle', style: 'width: 200px; height: 200px;') %>
+    <% end %>
+    <%# end user have a photo %>
+    </div>
+    <div class="col-md-7">
+      <h1><%= @user.username %></h1>	
+      <div class="user-detail">
+        <%= render 'following/follow', user: @user %>
+      </div>
+      <%# Post and Posts %>
+      <% if @user.videos.count > 1%>
+        <h4><%= @user.videos.count %> Posts &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following</h4>
+      <% else %>
+        <h4><%= @user.videos.count %> Post &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following</h4>
+      <% end %>
+      <%# end Post and Posts %>
+      
+      <%# any bio %>
+      <% if @user.bio? %>
+        <h5><%= @user.bio %></h5>
+      <% else %>
+        <h5>unknown</h5>
+      <% end %>
+      <%# end any bio %>
+    </div>
+  </div>
+  <hr>
+  <br>
+  <div class="row">
+    <% if user_signed_in? %>
+      <% if @user.follows.map(&:user_id).include?(current_user.id) %>
+          <% videos = @user.videos %>
+      <% elsif @user==current_user %>
+          <% videos = @user.videos %> 
+      <% else %>
+          <% videos = @user.videos.where(status: 'Public') %>    
+      <% end %>
+      <% videos.each do |video| %>
+        <div class="col-sm-6 col-md-3">
+          <%= link_to (image_tag video.thumbnail.url, size: "350x240", class: 'img-responsive'), video %>
+          <h5 style="font-weight: bold"><%= video.title %></h5>
+          <h6 style="margin-top:-10px;"></h6><%= time_ago_in_words(video.created_at) %> ago</h6>    
+        </div>
+      <% end %>
+    <% else %>
+      <% @user.videos.where(status: 'Public').each do |video| %>
+        <div class="col-sm-6 col-md-3">
+          <%= link_to (image_tag video.thumbnail.url, size: "350x240", class: 'img-responsive'), video %>
+          <h5 style="font-weight: bold"><%= video.title %></h5>
+          <h6 style="margin-top:-10px;"></h6><%= time_ago_in_words(video.created_at) %> ago</h6>    
+        </div>
+      <% end %>  
+    <% end %>
+        
+  </div>  
+
+    
+</div>
+

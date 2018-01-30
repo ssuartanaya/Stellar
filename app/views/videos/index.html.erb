@@ -1,15 +1,13 @@
-<p id="notice"><%= notice %></p>
-
 <br>
 <h4 style="font-weight: bold;">Trending</h4>
 <br>
 
   <tbody>
     <% @videos.each do |video| %>
-      <div class="col-sm-6 col-md-3 placeholder">
-        <%= link_to (image_tag video.thumbnail.url, size: "240x240"), video %>
+      <div class="col-sm-6 col-md-4">
+        <%= link_to (image_tag video.thumbnail.url, size: "350x240"), video %>
         <h5 style="font-weight: bold"><%= video.title %></h5>
-        <h6>Posted by <%= link_to video.user.try(:email), user_path(video.user) %> <br>
+        <h6>Posted by <%= link_to video.user.try(:username), user_path(video.user) %> <br>
         <%= time_ago_in_words(video.created_at) %> ago</h6>    
       </div>
       
