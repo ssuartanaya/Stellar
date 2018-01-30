@@ -1,0 +1,23 @@
+<p><%= comment.user.email %> <%= time_ago_in_words(comment.created_at)%></p>
+<p><%= comment.content %></p>
+
+
+<% if user_signed_in? %>
+	<% if comment.user_id == current_user.id %>
+		<%= link_to "Edit", edit_video_comment_path(comment.video, comment) %>
+		<%= link_to "Delete", video_comment_path(comment.video, comment), 
+																	method: :delete, 
+																	data: {confirm: "Are you sure?"} %>
+	<% end %>
+<% else %>
+<% end %>
+<%= render 'replies/form', reply: Reply.new(comment_id: comment.id, video_id: comment.video_id) %>
+
+<%= render comment.replies %>
+
+<%# comment.replies.each do |replya| %>
+	<%# render 'replies/reply', reply: replya %>
+<%# end %>
+
+
+
