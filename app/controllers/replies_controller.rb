@@ -1,5 +1,5 @@
 class RepliesController < ApplicationController
-	before_action :find_reply
+	before_action :find_reply, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user!
 
 	def create

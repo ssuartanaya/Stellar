@@ -7,10 +7,17 @@ class VideosController < ApplicationController
   def index
     @videos = Video.all
   end
+
+
   
   # GET /videos/1
   # GET /videos/1.json
   def show
+    unless @video.nil?
+      view_size = @video.views.to_i
+      @video.views = view_size + 1
+      @video.save
+    end
   end
 
   # GET /videos/new
@@ -65,7 +72,7 @@ class VideosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_video
-      @video = Video.find(params[:id])
+      @video = Video.find(params[:id]) rescue nil
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
