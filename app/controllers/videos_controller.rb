@@ -7,7 +7,7 @@ class VideosController < ApplicationController
   def index
     @videos = Video.all
   end
-
+  
   # GET /videos/1
   # GET /videos/1.json
   def show
@@ -57,7 +57,7 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     respond_to do |format|
-      format.html { redirect_to videos_url, notice: 'Video was successfully destroyed.' }
+      format.html { redirect_to videos_url, notice: 'Video was successfully deleted.' }
       format.json { head :no_content }
     end
   end

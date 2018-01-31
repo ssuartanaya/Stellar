@@ -22,18 +22,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">  
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><i class="glyphicon glyphicon-th"></i></a></li>
-            <li>
-              <% if user_signed_in? %>
-                <%= link_to new_video_path do %>
-                  <i class="glyphicon glyphicon-open"></i>
-                <% end %>
-              <% else %>
-                <%= link_to new_user_session_path do %>
-                  <i class="glyphicon glyphicon-open"></i>
-                <% end %>
-              <% end %>
-            </li>
+          <% if user_signed_in? %>
+            <li><%= link_to show_follow_path(current_user) do %><i class="glyphicon glyphicon-th"></i><% end %></li>
+          <% end %>
+            <li><%= link_to new_video_path do %><i class="glyphicon glyphicon-open"></i><% end %></li>
             <li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
             <% if user_signed_in? %>
               <% unless current_user.foto.blank? %>
@@ -81,13 +73,17 @@
 
     
     <% if notice %>
-    <div class="col-md-6"></div>
-    <% if user_signed_in? %><div class="col-md-6">
-        <div class="alert alert-success-alt alert-dismissable" id="layout" style="margin-top:2%;">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                ×</button><strong><p>Welcome, </strong>
-                <%= current_user.email %></p><% end  %></div>
-    </div><% end %>
+      <div class="col-md-6"></div>
+        <% if user_signed_in? %>
+          <div class="col-md-6">
+            <div class="alert alert-success-alt alert-dismissable" id="layout" style="margin-top:2%;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong><p><%= notice %></p></strong>
+            </div>
+          </div>
+        <% end  %>
+      </div>
+    <% end %>
     
     <div class="container">      
       <%= yield %>

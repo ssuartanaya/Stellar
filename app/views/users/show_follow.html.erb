@@ -1,0 +1,31 @@
+<br>
+<h4 style="font-weight: bold;">Following Feeds</h4>
+<br>
+
+  <tbody>
+    <%# Cari id akun yang di folow  %>
+    <% following_ids = Follow.where(user_id: current_user.id).map(&:following) %>
+    <%# Cari video dari akun yang di folow  %>
+    <% videos = Video.where("user_id IN (#{following_ids.join(',')})").group_by { |d| d[:user_id] } %>
+    <% videos.each do |user_id, vids| %>
+      <div class="row">
+        <%= image_tag(User.find(user_id).foto.url, class:'navbar-brand img-circle', style: 'width: 70px; height: 70px;') %>
+        <h4 style="line-height:50px;"><%= User.find(user_id).username  %></h4>
+      </div>
+    
+      <div class="row">
+        <% vids.each do |video| %>
+          <div class="col-sm-6 col-md-4">
+            <%= link_to (image_tag video.thumbnail.url, size: "350x240", class: "img-responsive"), video %>      
+            <h5 style="font-weight: bold"><%= video.title %></h5>
+            <h6>Posted by <%= link_to video.user.try(:username), user_path(video.user) %> <br>
+            <%= time_ago_in_words(video.created_at) %> ago</h6>    
+          </div>
+        <% end %>
+      </div>
+      <hr>
+    <% end %>
+      
+  </tbody>
+
+<br>
