@@ -1,22 +1,29 @@
 <% if user_signed_in? %>   
 	<% if user==current_user %>
-		<%= link_to "Edit Profile", edit_user_path(current_user), class:"btn btn-default" %>
+		<%= link_to edit_user_path(current_user), class:"btn btn-default" do %>
+			Edit Profile &nbsp; <i class="glyphicon glyphicon-cog"></i>
+		<% end %>
+		
 	<% else %>
 		<% follow_record = user.follows.where('user_id = ? and following = ?', current_user.id, user.id) %>
 		<% if follow_record.any? %>
-			<%= link_to 'Unfoll', unfoll_user_path(user.id),method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+			<%= link_to unfoll_user_path(user.id),method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' do %>
+				Unfollow &nbsp; <i class="glyphicon glyphicon-remove"></i>
+			<% end %>
 			<% if follow_record.first.status == true %>
 				<% followed = Follow.where('user_id = ? and following = ?', user.id, current_user.id).first %>
 				<% if followed.nil? %>
-					<i>User not following you</i>				
+					<i style="font-size: 10pt;">User not following you</i>				
 				<% else %>
-					<i>User follows you</i>
+					<i style="font-size: 10pt;">User follows you</i>
 				<% end %>
 			<% elsif follow_record.first.status == false %>
-				<i>Waiting</i>								
+				<i style="font-size: 10pt;">Waiting</i>							
 			<% end %>
 		<% else %>
-			<%= link_to 'Follow', follow_user_path(user.id), class: 'btn btn-primary' %>		
+			<%= link_to follow_user_path(user.id), class: 'btn btn-primary' do %>
+				Follow &nbsp; <i class="glyphicon glyphicon-plus"></i>
+			<% end %>		
 		<% end %>
 		
 	<% end %>

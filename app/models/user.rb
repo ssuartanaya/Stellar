@@ -9,5 +9,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  mount_uploader :foto, FotoUploader       
+  mount_uploader :foto, FotoUploader
+  mount_uploader :wall, WallUploader       
 end

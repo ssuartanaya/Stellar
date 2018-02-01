@@ -1,39 +1,52 @@
-<br><br><br>
-<div class="container">  
-  <div class="row">
-    <div class="col-md-3">
-    <%# user have a photo %>
-    <% unless @user.foto.blank? %>
-      <%= image_tag(@user.foto.url, class:'img-circle img-responsive', style: 'width: 200px; height: 200px;') %>
+  <div class="fb-profile" style="margin-top:-3px;">
+    <%# if wall any?  %>
+    <% unless @user.wall.blank? %>
+      <%= image_tag(@user.wall.url, class:'fb-image-lg cover', align: 'left',style: 'height: 330px;') %>
     <% else %>
-      <%= image_tag("default.jpg", class:'img-circle', style: 'width: 200px; height: 200px;') %>
+      <%= image_tag('default_wall.jpg', class:'fb-image-lg cover', align: 'left',style: 'height: 330px;') %>  
     <% end %>
-    <%# end user have a photo %>
-    </div>
-    <div class="col-md-7">
-      <h1><%= @user.username %></h1>	
-      <div class="user-detail">
-        <%= render 'following/follow', user: @user %>
-      </div>
-      <%# Post and Posts %>
-      <% if @user.videos.count > 1%>
-        <h4><%= @user.videos.count %> Posts &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following
-        &nbsp; <%= Video.where("user_id = ? and status = ?", @user.id, 'Private').count %> Private Posts</h4>
-      <% else %>
-        <h4><%= @user.videos.count %> Post &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following
-        &nbsp; <%= Video.where("user_id = ? and status = ?", @user.id, 'Private').count %> Private Posts</h4>
-      <% end %>
-      <%# end Post and Posts %>
-      
-      <%# any bio %>
-      <% if @user.bio? %>
-        <h5><%= @user.bio %></h5>
-      <% else %>
-        <h5>unknown</h5>
-      <% end %>
-      <%# end any bio %>
+    <%# end if wall any?  %>
+
+    <%# if photo any?  %>
+    <% unless @user.foto.blank? %>
+      <%= image_tag(@user.foto.url, class:'fb-image-profile thumbnail', align: 'left',style: 'width: 200px; height: 200px;') %>      
+    <% else %>
+      <%= image_tag("default.jpg", class:'fb-image-profile thumbnail', align: 'left',style: 'width: 200px; height: 200px;') %>
+    <% end %>
+    <%# end if photo any?  %>
+    
+    <div class="fb-profile-text">
+        <h1><%= @user.username %><%= render 'following/follow', user: @user %></h1>        
+          <%# any bio %>
+        <% if @user.bio? %>
+          <p><%= @user.bio %></p>
+        <% else %>
+          <p>unknown</p>
+        <% end %>
+        <%# end any bio %>
+        <%# Post and Posts %>
+        <% if @user.videos.count > 1%>
+          <h4><%= @user.videos.count %> Posts &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following
+          &nbsp; <%= Video.where("user_id = ? and status = ?", @user.id, 'Private').count %> Private Posts</h4>
+        <% else %>
+          <h4><%= @user.videos.count %> Post &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following
+          &nbsp; <%= Video.where("user_id = ? and status = ?", @user.id, 'Private').count %> Private Posts</h4>
+        <% end %>
+        <%# end Post and Posts %>  
+        <div class="user-detail">
+          <div class="row">
+          <div class="col-md-9">
+              
+            </div>
+            <div class="col-md-3">
+              
+            </div>
+            
+          </div>  
+        </div>
     </div>
   </div>
+      
   <hr>
   <br>
   <div class="row">
@@ -68,7 +81,4 @@
     <% end %>
         
   </div>  
-
-    
-</div>
 
