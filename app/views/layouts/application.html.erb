@@ -24,9 +24,8 @@
           <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
             <li><%= link_to show_follow_user_path(current_user) do %><i class="glyphicon glyphicon-th"></i><% end %></li>
-          
             <li><%= link_to new_video_path do %><i class="glyphicon glyphicon-open"></i><% end %></li>
-            <li><%= link_to notif_user_path(current_user) do %><i class="glyphicon glyphicon-bell"></i><% end %></li>           </a></li>
+            <li><%= link_to notif_user_path(current_user) do %><i class="glyphicon glyphicon-bell" style="color:red"></i><% end %></li>           </a></li>
             
               <% unless current_user.foto.blank? %>
                 <li class="dropdown">

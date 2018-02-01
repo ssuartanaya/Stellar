@@ -6,6 +6,7 @@ class VideosController < ApplicationController
   # GET /videos.json
   def index
     @videos = Video.all
+    @top_users = Video.select("user_id, count(*) as total_video").group(1).order("total_video DESC").limit(5).includes(:user)
   end
   
   # GET /videos/1

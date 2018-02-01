@@ -61,7 +61,16 @@ body {
     color: #fff;
     background-color: #1f232c;
     border-color: #1f232c;
-}
+  }
+  .imgs {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+  }
+
+  .imgs:hover {
+      box-shadow: 0 0 2px 1px #D4AF37;
+  }
   
   /*
    * Sidebar
