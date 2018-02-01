@@ -1,42 +1,69 @@
-<%= form_with(model: video, local: true) do |form| %>
-  <% if video.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(video.errors.count, "error") %> prohibited this video from being saved:</h2>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="panel panel-default" style="background: rgba(255,255,255,0.3)">
+      <div class="panel-body">
 
-      <ul>
-      <% video.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <div>
+            
+          <%= image_tag("up.jpg", class:'img-circle', style: 'width: 100px; height: 100px; margin-left: auto; margin-right: auto; display: block') %>
+           <h2 style="text-align:center">Upload New Video</h2>
+        </div>
+
+        <br>
+        <%= form_with(model: video, local: true) do |form| %>
+          <% if video.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(video.errors.count, "error") %> prohibited this video from being saved:</h2>
+
+              <ul>
+              <% video.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="form-group">
+            <%= form.label :title %>
+            <%= form.text_field :title, id: :video_title, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :description %>
+            <%= form.text_area :description, id: :video_description, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :thumbnail %>
+            <%= form.file_field :thumbnail, id: :video_thumbnail %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :video %>
+            <%= form.file_field :video, id: :video_video %>
+          </div>          
+
+          <div class="form-group">
+            <%= form.label :status %>
+            <%= form.select :status, options_for_select([
+              "Public",
+              "Private"]), 
+              {}, { class: "form-control" } %>
+          </div>
+
+          <br>
+          <div class="actions">
+            <%= form.submit "Upload", class:"btn btn-lg btn-primary btn-block" %>
+          </div>
+        <% end %>
+
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :video_title %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :video_description %>
-  </div>
 
-  <div class="field">
-    <%= form.label :thumbnail %>
-    <%= form.file_field :thumbnail, id: :video_thumbnail %>
-  </div>
 
-  <div class="field">
-    <%= form.label :video %>
-    <%= form.file_field :video, id: :video_video %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status, id: :video_status %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
