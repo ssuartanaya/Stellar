@@ -1,4 +1,37 @@
 <br>
+<br>
+
+<div class="row">
+  <div class="col-md-2">
+    <div class="list-group">
+      <a class="list-group-item active text-center">TOP UPLOADER</a>
+      <% a = @videos.group_by { |d| d[:user_id] }.max %>
+      <a href="slowmo.html" class="list-group-item">Beautiful Slowmo</a>
+      <a href="plugin.html" class="list-group-item">Plugins</a>
+      <a href="plugin.html" class="list-group-item">Stock-FX</a>
+      <a href="track.html" class="list-group-item">Technique</a>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="page-header" style="margin-top: -1%;">
+      <h4>Recently  <font color="#3b5998">Upload</font></h4>
+    </div>
+    <div class="row">
+      <% video_3 = @videos.order(id: :desc).limit(3) %>
+      <% vidio = video_3.each do |vidio| %>
+      <div class="col-md-4">
+        <%= link_to (image_tag vidio.thumbnail.url, size: "350x240", class: 'img-responsive'), vidio %>
+        <h4><%= vidio.title %></h4>
+        <h5><%= vidio.description %></h5>
+        <h6>Posted by <%= link_to vidio.user.try(:username), user_path(vidio.user) %>
+        <%= time_ago_in_words(vidio.created_at) %> ago</h6>
+      </div>
+      <% end %>
+    </div>   
+  </div>
+</div>
+
+<br>
 <h4 style="font-weight: bold;">Trending</h4>
 <br>
 

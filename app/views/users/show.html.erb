@@ -17,9 +17,11 @@
       </div>
       <%# Post and Posts %>
       <% if @user.videos.count > 1%>
-        <h4><%= @user.videos.count %> Posts &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following</h4>
+        <h4><%= @user.videos.count %> Posts &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following
+        &nbsp; <%= Video.where("user_id = ? and status = ?", @user.id, 'Private').count %> Private Posts</h4>
       <% else %>
-        <h4><%= @user.videos.count %> Post &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following</h4>
+        <h4><%= @user.videos.count %> Post &nbsp; <%= @user.follows.count %> Followers &nbsp; <%= Follow.where(:user_id => @user.id).count  %> Following
+        &nbsp; <%= Video.where("user_id = ? and status = ?", @user.id, 'Private').count %> Private Posts</h4>
       <% end %>
       <%# end Post and Posts %>
       
@@ -36,12 +38,17 @@
   <br>
   <div class="row">
     <% if user_signed_in? %>
-      <% if @user.follows.map(&:user_id).include?(current_user.id) %>
-          <% videos = @user.videos %>
+      <% follow_record = @user.follows.where('user_id = ? and following = ?', current_user.id, @user.id) %>
+      <% if follow_record.any? %>
+        <% if follow_record.first.status == true %>
+            <% videos = @user.videos %>  
+        <% elsif follow_record.first.status == false %>
+            <% videos = @user.videos.where(status: 'Public') %>					
+        <% end %>
       <% elsif @user==current_user %>
-          <% videos = @user.videos %> 
+          <% videos = @user.videos %>
       <% else %>
-          <% videos = @user.videos.where(status: 'Public') %>    
+          <% videos = @user.videos.where(status: 'Public') %>     
       <% end %>
       <% videos.each do |video| %>
         <div class="col-sm-6 col-md-3">

@@ -8,6 +8,7 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
+    font-family: segoe ui;
   }
 
   .alert-purple { border-color: #694D9F;background: #694D9F;color: #fff; }
@@ -54,6 +55,13 @@ body {
   .navbar-fixed-top {
     border: 0;
   }
+
+  .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    z-index: 2;
+    color: #fff;
+    background-color: #1f232c;
+    border-color: #1f232c;
+}
   
   /*
    * Sidebar
