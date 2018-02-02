@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20180201171803) do
     t.integer "user_id"
     t.string "thumbnail"
     t.string "video"
+    t.integer "views"
   end
 
 end

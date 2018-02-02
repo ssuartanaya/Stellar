@@ -20,26 +20,44 @@
       <div class="col-md-4">
         <%= link_to (image_tag vidio.thumbnail.url, size: "350x240", class: 'img-responsive imgs'), vidio %>
         <h4><%= vidio.title %></h4>
-        <h5><%= vidio.description %></h5>
-        <h6>Posted by <%= link_to vidio.user.try(:username), user_path(vidio.user) %>
-        <%= time_ago_in_words(vidio.created_at) %> ago</h6>
+        <p><%= link_to vidio.user.try(:username), user_path(vidio.user) %></p>
+        <h6><%= vidio.views %> views | <%= time_ago_in_words(vidio.created_at) %> ago</h6>
       </div>
       <% end %>
     </div>   
   </div>
 </div>
+<br>
+
+  <div class="page-header">
+    <h4 style="font-weight: bold; text-align: center">Top <font color="#3b5998">Views</font></h4>
+  </div>
+  <div class="row">
+    <% @top_videos.each do |top| %>
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <%= link_to (image_tag top.thumbnail.url, size: "350x240", class: "img-responsive"), top %>
+        <div class="caption" style="text-align:center">
+          <h2><%= top.title %></h2>
+          <h5><%= link_to top.user.try(:username), user_path(top.user) %></h5>
+          <h6><%= top.views %> views | <%= time_ago_in_words(top.created_at) %> ago</h6>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
 
 <br>
-<h4 style="font-weight: bold;">Trending</h4>
+<h4 style="font-weight: bold;">Recomended</h4>
 <br>
 
   <tbody>
     <% @videos.each do |video| %>
-      <div class="col-sm-6 col-md-4">
-        <%= link_to (image_tag video.thumbnail.url, size: "350x240"), video %>
+      <div class="col-sm-6 col-md-3">
+        <%= link_to (image_tag video.thumbnail.url, size: "350x240", class: "img-responsive"), video %>
         <h5 style="font-weight: bold"><%= video.title %></h5>
-        <h6>Posted by <%= link_to video.user.try(:username), user_path(video.user) %> <br>
-        <%= time_ago_in_words(video.created_at) %> ago</h6>    
+        <p><%= link_to video.user.try(:username), user_path(video.user) %></p>
+        <h6><%= video.views %> views | <%= time_ago_in_words(video.created_at) %> ago</h6>
       </div>
       
     <% end %>

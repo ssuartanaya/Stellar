@@ -7,9 +7,8 @@ class VideosController < ApplicationController
   def index
     @videos = Video.all
     @top_users = Video.select("user_id, count(*) as total_video").group(1).order("total_video DESC").limit(5).includes(:user)
+    @top_videos = Video.order("views DESC").limit(3)
   end
-
-
   
   # GET /videos/1
   # GET /videos/1.json
@@ -65,7 +64,7 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     respond_to do |format|
-      format.html { redirect_to videos_url, notice: 'Video was successfully deleted.' }
+      format.html { redirect_to user_path(current_user), notice: 'Video was successfully deleted.' }
       format.json { head :no_content }
     end
   end
