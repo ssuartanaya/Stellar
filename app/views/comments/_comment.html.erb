@@ -1,19 +1,46 @@
-<p><%= comment.user.username %> <%= time_ago_in_words(comment.created_at)%></p>
-<p><%= comment.content %></p>
+<div class="container" style="padding: 0px">
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-xs-1" style="padding: 0px 12px">
+				<%= image_tag(comment.user.foto, class:'img-circle img-responsive', style: 'width: 38px; height: 38px;') %>
+			</div>
+			<div class="col-xs-11" style="padding: 0px">
+				<p><span class="reply"><%= comment.user.username %></span>
+					<span class="timegrey"><%= time_ago_in_words(comment.created_at) %></span> &nbsp;
+					<span><% if user_signed_in? %>
+							<% if comment.user_id == current_user.id %>
+								<%= link_to "Edit", edit_video_comment_path(comment.video, comment) %>
+								<%= link_to "Delete", video_comment_path(comment.video, comment), 
+																							method: :delete, 
+																							data: {confirm: "Are you sure?"} %>
+							<% end %>
+						<% end %></span></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-9" style="padding: 0px">
+				<p style="margin-top: -17px;"><%= comment.content %></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-9" style="padding: 0px">
+				<%= render 'replies/form', reply: Reply.new(comment_id: comment.id, video_id: comment.video_id) %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-9" style="padding: 0px">
+				<%= render comment.replies %>
+			</div>
+		</div>
+	</div>
+</div>
 
 
-<% if user_signed_in? %>
-	<% if comment.user_id == current_user.id %>
-		<%= link_to "Edit", edit_video_comment_path(comment.video, comment) %>
-		<%= link_to "Delete", video_comment_path(comment.video, comment), 
-																	method: :delete, 
-																	data: {confirm: "Are you sure?"} %>
-	<% end %>
-<% else %>
-<% end %>
-<%= render 'replies/form', reply: Reply.new(comment_id: comment.id, video_id: comment.video_id) %>
 
-<%= render comment.replies %>
+
+
+
+
 
 <%# comment.replies.each do |replya| %>
 	<%# render 'replies/reply', reply: replya %>

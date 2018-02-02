@@ -1,6 +1,23 @@
 <%= simple_form_for(reply) do |f| %>
 	<%= f.hidden_field :comment_id %>
 	<%= f.hidden_field :video_id %>
-	<%= f.input :content, label: "Reply Comment" %>
-	<%= f.submit :submit %>
+	<div class="container" style="padding: 0px">
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-xs-1" style="padding: 0px 0px 0px 22px">
+					<% if user_signed_in?%>
+						<%= image_tag(current_user.foto, class:'img-circle img-responsive', style: 'width: 30px; height: 30px;') %>
+					<% else %>
+						<%= image_tag("default.jpg", class:'img-circle img-responsive', style: 'width: 30px; height: 30px;') %>	
+					<% end %>
+				</div>
+				<div class="col-xs-7" style="padding: 0px">
+					<%= f.input :content, label: false, input_html: {style: 'height:30px'} %>			
+				</div>
+				<div class="col-xs-2" style="padding-top: 0px">
+					<%= f.submit "Reply", class: 'btn btn-primary' %>					
+				</div>		
+			</div>
+		</div>
+	</div>	
 <% end %>

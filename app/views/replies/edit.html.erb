@@ -1,5 +1,5 @@
-<h3>Edit Comment</h3>
-<%= simple_form_for([@video, @comment]) do |f| %>
+<h3>Edit Reply</h3>
+<%= simple_form_for([@reply]) do |f| %>
 	<%= f.input :content, label: false %>
 	<%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>
