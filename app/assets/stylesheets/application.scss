@@ -48,12 +48,21 @@ body {
     background-color: #1f232c;
     color: #fff;
     }
+    .navbar-nav > li > .asd {
+    margin-top: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }  
   /*
    * Top navigation
    * Hide default border to remove 1px line.
    */
   .navbar-fixed-top {
     border: 0;
+  }
+  .navbar-nav > li > .dropdown-menu {
+    margin-top: 5px;
+   
   }
 
   .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {

@@ -22,23 +22,51 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">  
           <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-            <li><%= link_to show_follow_user_path(current_user) do %><i class="glyphicon glyphicon-th"></i><% end %></li>
-            <li><%= link_to new_video_path do %><i class="glyphicon glyphicon-open"></i><% end %></li>
-            <% notif = Follow.where('following = ? and status = ?', current_user, false) %>
-            <% if notif.any? %>
-              <li><%= link_to notif_user_path(current_user) do %><i class="glyphicon glyphicon-bell" style="color:#E25041"></i>
-              <span class="badge" style="margin-left:-15px; background-color: #2C82C9"><%= notif.count %></span><% end %></li>
-            <% else %>
-              <li><%= link_to notif_user_path(current_user) do %><i class="glyphicon glyphicon-bell"></i><% end %></li>
-            <% end %>
-        
+            <% if user_signed_in? %>
+              <li><%= link_to show_follow_user_path(current_user) do %><i class="glyphicon glyphicon-th"></i><% end %></li>
+              <li><%= link_to new_video_path do %><i class="glyphicon glyphicon-open"></i><% end %></li>
+              <% notif = Follow.where('following = ? and status = ?', current_user, false) %>
+              <% if notif.any? %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <i class="glyphicon glyphicon-bell"></i><span class="badge" style="margin-left:-15px; background-color: #2C82C9"><%= notif.count %></span>
+                  </a>
+                  <ul class="dropdown-menu" style="min-width:220px">
+                    <% follower_ids = Follow.where('following = ? and status = ?', current_user.id, 'f').order('id DESC').limit(2).map(&:user_id) %>
+                    <% follower_ids.each do |user_id| %>
+                    <li> &nbsp;
+                      <span><% unless User.find(user_id).foto.blank? %>
+                        <%= image_tag(User.find(user_id).foto.url, class:'img-circle', style: 'width: 50px; height: 50px;') %>
+                      <% else %>
+                        <%= image_tag("default.jpg", class:'img-circle', style: 'width: 50px; height: 50px;') %>	
+                      <% end %>
+                    <%= link_to User.find(user_id).username, user_path(user_id) %></span></li>  
+                    <li> &nbsp; wants to follow you, Accept?</li>
+                      &nbsp; <%= link_to accept_user_path(current_user.id, user_id), class: 'btn btn-success' do %>Accept <i class="glyphicon glyphicon-ok"></i><% end %>
+                      <%= link_to decline_user_path(current_user.id, user_id), method: :delete, class: 'btn btn-danger' do %>Decline <i class="glyphicon glyphicon-remove"></i><% end %></li>
+                    <li role="separator" class="divider"></li>
+                    <% end %>
+                    <% if notif.count > 2 %>    
+                      <li style="text-align: center"><%= link_to "See all notification", notif_user_path(current_user) %></li> 
+                    <% end %>
+                  </ul>
+                </li>
+              <% else %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <i class="glyphicon glyphicon-bell"></i>
+                  </a>
+                  <ul class="dropdown-menu" style="min-width:220px">
+                    <li>&nbsp;There's no notification</li>
+                  </ul>
+                </li>
+              <% end %>
               <% unless current_user.foto.blank? %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <%= image_tag(current_user.foto.url, class:'navbar-brand img-circle', style: 'width: 70px; height: 70px; margin-top:-45%;') %>
                   </a>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu asd">
                     <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
                     <li><%= link_to "My Video", user_path(current_user) %></li>
                     <li role="separator" class="divider"></li>
