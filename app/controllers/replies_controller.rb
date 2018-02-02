@@ -16,7 +16,7 @@ class RepliesController < ApplicationController
 
 	def update
 		if @reply.update(reply_params)
-			redirect_to video_path(@video)
+			redirect_to video_path(@reply.video_id)
 		else
 			render 'edit'
 		end
@@ -24,7 +24,7 @@ class RepliesController < ApplicationController
 
 	def destroy
 		@reply.destroy
-		redirect_to video_path(@video)
+		redirect_to video_path(@reply.video_id)
 	end
 
 	private
@@ -33,7 +33,7 @@ class RepliesController < ApplicationController
 		end
 
 		def find_reply
-			@reply = @comment.replys.find(params[:id])
+			@reply = Reply.find(params[:id]) rescue nil
 		end
 
 end
