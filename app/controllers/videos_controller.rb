@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :set_video, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /videos
@@ -67,6 +67,15 @@ class VideosController < ApplicationController
       format.html { redirect_to user_path(current_user), notice: 'Video was successfully deleted.' }
       format.json { head :no_content }
     end
+  end
+
+  def upvote
+    @video.upvote_from current_user
+    redirect_to @video
+  end
+
+  def downvote
+    
   end
 
   private
