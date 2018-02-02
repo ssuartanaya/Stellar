@@ -9,8 +9,28 @@
 		  <%= @video.title %>
 		</h4>
 
-		<p class="timegrey"><%= @video.views %> views</p> 
-
+		<div class="container" style="padding: 0px">
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-xs-8" style="padding: 0px">
+						<p class="timegrey"><%= @video.views %> views</p>				
+					</div>
+					<div class="col-xs-2" style="padding: 0px 30px 0px 50px">
+						<h4 style="margin: 0px"><%= link_to like_video_path(@video), class: "like", method: :put do %>
+							<span class="glyphicon glyphicon-thumbs-up" style="margin-right: 3px"></span>
+						<% end %></span> 
+							<span><%= @video.get_upvotes.size%></span></h4>
+					</div>
+					<div class="col-xs-2" style="padding: 0px 30px 0px 0px">
+						<h4 style="margin: 0px"><%= link_to unlike_video_path(@video), class: "like", method: :put do %>
+							<span class="glyphicon glyphicon-thumbs-down" style="margin-right: 3px"></span>
+						<% end %></span> 
+							<span><%= @video.get_downvotes.size%></span></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<hr>
 
 		<div class="container" style="padding: 0px">
