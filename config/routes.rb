@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :videos do
-<<<<<<< HEAD
-    resources :comments
-=======
   	resources :comments
     member do
       put "like" => "videos#upvote"
       put "unlike" => "videos#downvote"
     end
->>>>>>> f21d44d50927ec6e1c680fbac67dde5968104a16
+
   end
   resources :replies
   resources :search_items
