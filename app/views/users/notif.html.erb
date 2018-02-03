@@ -24,26 +24,5 @@
 				<%# Cari video dari akun yang di folow  %>   
 			</tbody>
 		</div>
-		<div class="col-md-6">
-			<h5>Following Back</h5>
-			<tbody>
-				<%# Cari id akun yang di folow  %>
-				<% follower_ids = Follow.where('following = ? and status = ?', current_user.id, 'f').map(&:user_id) %>
-				<% follower_ids.each do |user_id| %>
-					<div class="row">
-						<% unless User.find(user_id).foto.blank? %>
-							<%= image_tag(User.find(user_id).foto.url, class:'navbar-brand img-circle', style: 'width: 100px; height: 100px;') %>
-						<% else %>
-							<%= image_tag("default.jpg", class:'navbar-brand img-circle', style: 'width: 100px; height: 100px;') %>	
-						<% end %>        
-						<h4 style="line-height:50px;"><%= link_to User.find(user_id).username, user_path(user_id) %></h4>
-						<p style="margin-top:-2%">wants to follow you, Accept?</p>
-						<%= link_to 'Accept', accept_user_path(current_user.id, user_id), class: 'btn btn-success' %>
-						<%= link_to 'Decline', decline_user_path(current_user.id, user_id), method: :delete, class: 'btn btn-danger' %>
-					</div>
-				<% end %>	
-				<%# Cari video dari akun yang di folow  %>   
-			</tbody>
-		</div>
 	</div>
 </div>
