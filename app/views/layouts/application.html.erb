@@ -90,21 +90,21 @@
               <li><%= link_to "Login", new_user_session_path %></li>
             <% end %>  
           </ul>
-          <form class="navbar-form" style="margin-left:15%;">
+          
+          <%= form_tag search_items_path, class: 'navbar-form', style:'margin-left:15%;', method: :get do  %>
             <div class="input-group" style="width: 45%;">
-              <input type="text" class="search form-control" placeholder="Search....">
+              <%= text_field_tag 'text_search', nil, class: 'search form-control'  %>
               <div class="input-group-btn">
-                <button type="submit" class="btn btn-primary">
-                  <i class="glyphicon glyphicon-search"></i>
-                </button>
+                <%= submit_tag 'Search', class: 'btn btn-primary' do %>
+                <i class="glyphicon glyphicon-search"></i>
+                <% end %>
               </div>
             </div>
-          </form>
+          <% end %>
         </div>
       </div>
     </nav>
 
-    
     <% if notice %>
       <div class="col-md-6"></div>
         <% if user_signed_in? %>

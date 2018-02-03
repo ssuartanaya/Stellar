@@ -1,0 +1,25 @@
+<br> 
+<div class="row">	
+	<div class="col-md-6">
+		<h4>Result users</h4>
+		<br>
+		<% @users.each do |user| %>
+			<% unless user.foto.blank? %>
+				<%= image_tag(user.foto.url, style: 'width: 100px; height: 100px;') %>
+			<% else %>
+				<%= image_tag("default.jpg", style: 'width: 100px; height: 100px;') %>	
+			<% end %>
+			<h4>&nbsp;&nbsp;&nbsp;<%= user.username %></h4>
+		<% end %> 
+	</div>
+	<div class="col-md-6">
+		<h4>Result Videos</h4>
+		<br>
+		<% @videos.each do |video| %>
+			<%= link_to (image_tag video.thumbnail.url, size: "350x240", class: "img-responsive"), video %>
+			<h5 style="font-weight: bold"><%= video.title %></h5>
+			<p><%= link_to video.user.try(:username), user_path(video.user) %></p>
+			<h6><%= video.views %> views | <%= time_ago_in_words(video.created_at) %> ago</h6>
+		<% end %> 
+	</div>
+</div>

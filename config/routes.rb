@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :videos do
-  	resources :comments
+    resources :comments
   end
-	resources :replies
+  resources :replies
+  resources :search_items
   resources :users do
     member do 
       get 'users/:id/follow', to: 'users#follow', as: 'follow'
