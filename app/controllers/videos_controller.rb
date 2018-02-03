@@ -68,17 +68,12 @@ class VideosController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-<<<<<<< HEAD
-  def search
-=======
   def upvote
     @video.upvote_from current_user
     redirect_to @video
   end
 
   def downvote
->>>>>>> f21d44d50927ec6e1c680fbac67dde5968104a16
     
   end
 
