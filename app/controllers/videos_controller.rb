@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :set_video, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /videos
@@ -69,7 +69,16 @@ class VideosController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def search
+=======
+  def upvote
+    @video.upvote_from current_user
+    redirect_to @video
+  end
+
+  def downvote
+>>>>>>> f21d44d50927ec6e1c680fbac67dde5968104a16
     
   end
 
